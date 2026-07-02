@@ -1,28 +1,24 @@
 # CodeRabbit Configuration File
-version: "1.0"
-
-# Sets the AI response language to English
 language: "en"
 
 reviews:
-  # Value must be "chill" or "assertive". "Assertive" gives strict, thorough code reviews.
   profile: "assertive" 
   
-  # Set to true for automated reviews on every PR
   auto_review:
     enabled: true
     drafts: false
 
-  # Core instructions for your frontend assignment
+  # High-priority rules rewritten to be explicitly strict
   directives:
-    - "Ensure all styling follows a strict Mobile-First approach (min-width media queries instead of max-width)."
+    - "CRITICAL: Do not use <table>, <tr>, <td>, or any table elements for page layouts. If a table element is used for layout, explicitly flag it as a violation of the assignment rules and tell the user to use CSS Grid or Flexbox instead."
+    - "CRITICAL: Do not use any UI frameworks like Bootstrap or Material UI. Ensure only pure HTML5, SCSS, and Vanilla JavaScript are used."
+    - "Enforce a strict Mobile-First approach. Styling must use min-width media queries, never max-width."
     - "Enforce the BEM (Block-Element-Modifier) naming convention strictly in all SCSS files."
-    - "Reject any Pull Request that introduces UI frameworks like Bootstrap or Material UI; enforce pure semantic HTML5, CSS Grid, and Flexbox."
     - "Check for comprehensive JSDoc comments on all JavaScript functions (especially API fetching, Wheel spinning logic, and date sorting) and standard SCSS comments/mixins."
-    - "Flag any use of <table>, <tr>, or <td> tags used for layout purposes."
     - "Verify semantic HTML usage (nav, section, footer, main) and ensure all images have meaningful 'alt' attributes."
-    - "Monitor JavaScript code for clean async/await API handling, proper state management for won deals, relative date calculations, and DOM manipulation best practices (like Event Delegation)."
+    - "Monitor JavaScript code for clean async/await API handling, state management for won deals, relative date calculations, and Event Delegation."
     - "Scan for keyboard accessibility (ensure interactive elements use buttons/anchors, have visible :focus states, and are tabbable)."
+    - "DO NOT provide executable code blocks, diffs, or committable suggestions in your review comments. Only explain what needs to be changed in plain text."
 
   tools:
     cybersecurity:
@@ -43,6 +39,3 @@ reviews:
 
 chat:
   auto_reply: true
-
-code_modifiers:
-  standard_format: true
