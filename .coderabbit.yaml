@@ -2,23 +2,39 @@
 language: "en"
 
 reviews:
-  profile: "assertive" 
+  profile: "assertive"
   
   auto_review:
     enabled: true
     drafts: false
 
-  # High-priority rules rewritten to be explicitly strict
-  directives:
-    - "CRITICAL: Do not use <table>, <tr>, <td>, or any table elements for page layouts. If a table element is used for layout, explicitly flag it as a violation of the assignment rules and tell the user to use CSS Grid or Flexbox instead."
-    - "CRITICAL: Do not use any UI frameworks like Bootstrap or Material UI. Ensure only pure HTML5, SCSS, and Vanilla JavaScript are used."
-    - "Enforce a strict Mobile-First approach. Styling must use min-width media queries, never max-width."
-    - "Enforce the BEM (Block-Element-Modifier) naming convention strictly in all SCSS files."
-    - "Check for comprehensive JSDoc comments on all JavaScript functions (especially API fetching, Wheel spinning logic, and date sorting) and standard SCSS comments/mixins."
-    - "Verify semantic HTML usage (nav, section, footer, main) and ensure all images have meaningful 'alt' attributes."
-    - "Monitor JavaScript code for clean async/await API handling, state management for won deals, relative date calculations, and Event Delegation."
-    - "Scan for keyboard accessibility (ensure interactive elements use buttons/anchors, have visible :focus states, and are tabbable)."
-    - "DO NOT provide executable code blocks, diffs, or committable suggestions in your review comments. Only explain what needs to be changed in plain text."
+  # Targeted file-by-file rules to strictly enforce assignment criteria
+  path_instructions:
+    - path: "**/*.html"
+      instructions: |
+        CRITICAL: Absolutely forbid the use of <table>, <tr>, <td>, or any table elements for structural layouts. If found, flag it as a major violation and instruct the user to use CSS Grid or Flexbox instead.
+        Ensure semantic HTML5 elements (nav, section, footer, main) are used correctly.
+        Ensure every <img> tag contains a meaningful, non-empty 'alt' attribute for accessibility.
+        Check that interactive elements use proper tags (like <button> or <a>) to maintain keyboard accessibility.
+        DO NOT provide any code diffs, code generation blocks, or committable suggestions. Provide text feedback only.
+
+    - path: "**/*.scss"
+      instructions: |
+        Ensure a strict Mobile-First styling approach is used (rely on min-width media queries, never max-width).
+        Enforce the BEM (Block-Element-Modifier) naming convention strictly for all classes.
+        Ensure the design layout relies strictly on display: grid or display: flex.
+        Flag and reject any imports or usage of external UI frameworks like Bootstrap or Material UI.
+        Check for proper SCSS mixins usage and standard SASS documentation/comments.
+        DO NOT provide any code diffs, code generation blocks, or committable suggestions. Provide text feedback only.
+
+    - path: "**/*.js"
+      instructions: |
+        Ensure the API data from the Gist endpoint is fetched only once and properly handled using async/await.
+        Verify that the "Spin & Win" wheel selection logic correctly picks 4 unique deals while excluding already won deals.
+        Ensure won deals are correctly accumulated, stored in state, and sorted by their relative validity date.
+        Check that Event Delegation is utilized effectively for interacting with dynamic UI lists (e.g., the Copy Code buttons).
+        Enforce standard JSDoc formatting and comments on all major functions.
+        DO NOT provide any code diffs, code generation blocks, or committable suggestions. Provide text feedback only.
 
   tools:
     cybersecurity:
