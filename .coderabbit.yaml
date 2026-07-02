@@ -1,19 +1,19 @@
-# CodeRabbit Configuration for Frontend Assignment (HTML/SCSS/Vanilla JS)
-# Version: 1.0
-
+# CodeRabbit Configuration File
 version: "1.0"
 
-language:
-  javascript:
-    strict_mode: true
-  css:
-    strict_mode: true
+# Sets the AI response language to English
+language: "en"
 
 reviews:
-  profile: "thorough" # Essential for catching logic errors in your Spin & Win wheel, API handling, and CSS flaws.
-  request_review_trigger: "auto" # Recommended 'auto' so you get instant feedback on your 1st PR for Netlify deployment visibility.
+  # Value must be "chill" or "assertive". "Assertive" gives strict, thorough code reviews.
+  profile: "assertive" 
+  
+  # Set to true for automated reviews on every PR
+  auto_review:
+    enabled: true
+    drafts: false
 
-  # Directives to instruct the AI what rules it must evaluate against
+  # Core instructions for your frontend assignment
   directives:
     - "Ensure all styling follows a strict Mobile-First approach (min-width media queries instead of max-width)."
     - "Enforce the BEM (Block-Element-Modifier) naming convention strictly in all SCSS files."
@@ -26,21 +26,21 @@ reviews:
 
   tools:
     cybersecurity:
-      enabled: true # Catches exposed API keys or unvalidated data handling from the gist API
+      enabled: true
     linters:
       enabled: true
-    ast_diff:
-      enabled: true
 
-  # Filter out irrelevant boilerplate code to save time and review noise
   path_filters:
     - "!node_modules/**"
-    - "!README.md"
-    - "!.gitignore"
+    - "!dist/**"
+    - "!build/**"
+    - "!.next/**"
     - "!package-lock.json"
-    - "!package.json"
+    - "!yarn.lock"
+    - "!pnpm-lock.yaml"
+    - "!**/vendor/**"
+    - "!**/*.md"
 
-# Allows you to ask CodeRabbit questions directly in the PR comments (e.g., "How can I optimize this wheel animation?")
 chat:
   auto_reply: true
 
