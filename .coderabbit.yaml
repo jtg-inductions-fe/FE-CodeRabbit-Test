@@ -3,12 +3,10 @@ language: "en"
 
 reviews:
   profile: "assertive"
-  
   auto_review:
     enabled: true
     drafts: false
 
-  # Targeted file-by-file rules to strictly enforce assignment criteria
   path_instructions:
     - path: "**/*.html"
       instructions: |
@@ -16,7 +14,7 @@ reviews:
         Ensure semantic HTML5 elements (nav, section, footer, main) are used correctly.
         Ensure every <img> tag contains a meaningful, non-empty 'alt' attribute for accessibility.
         Check that interactive elements use proper tags (like <button> or <a>) to maintain keyboard accessibility.
-        DO NOT provide any code diffs, code generation blocks, or committable suggestions. Provide text feedback only.
+        DO NOT provide any code diffs, code snippets, or committable suggestions. Provide plain text feedback only.
 
     - path: "**/*.scss"
       instructions: |
@@ -25,7 +23,7 @@ reviews:
         Ensure the design layout relies strictly on display: grid or display: flex.
         Flag and reject any imports or usage of external UI frameworks like Bootstrap or Material UI.
         Check for proper SCSS mixins usage and standard SASS documentation/comments.
-        DO NOT provide any code diffs, code generation blocks, or committable suggestions. Provide text feedback only.
+        DO NOT provide any code diffs, code snippets, or committable suggestions. Provide plain text feedback only.
 
     - path: "**/*.js"
       instructions: |
@@ -34,7 +32,7 @@ reviews:
         Ensure won deals are correctly accumulated, stored in state, and sorted by their relative validity date.
         Check that Event Delegation is utilized effectively for interacting with dynamic UI lists (e.g., the Copy Code buttons).
         Enforce standard JSDoc formatting and comments on all major functions.
-        DO NOT provide any code diffs, code generation blocks, or committable suggestions. Provide text feedback only.
+        DO NOT provide any code diffs, code snippets, or committable suggestions. Provide plain text feedback only.
 
   tools:
     cybersecurity:
@@ -53,5 +51,6 @@ reviews:
     - "!**/vendor/**"
     - "!**/*.md"
 
+# Disabling chat to remove AI prompt boxes
 chat:
-  auto_reply: true
+  auto_reply: false
